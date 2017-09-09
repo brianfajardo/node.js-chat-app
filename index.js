@@ -17,4 +17,13 @@ app.use(express.static(path.join(__dirname, './public')))
 app.use(webpackDevMiddleware(webpack(webpackConfig)))
 app.use(bodyParser.json())
 
+io.on('connection', (socket) => {
+
+  socket.on('user:message', (message) => {
+    socket.broadcast.emit('user:message', message)
+  })
+
+  socket.on('user:disconnect', socket.disconnect)
+})
+
 server.listen(PORT, () => console.log(`Server listening on port:${PORT}`))
