@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import io from 'socket.io-client'
+require("materialize-loader")
 
 class App extends Component {
 
@@ -41,21 +42,25 @@ class App extends Component {
 
   render() {
     const messages = this.state.messages.map(({ displayName, text }, index) => {
-      return <li key={index}><b>{displayName}:</b> {text}</li>
+      return <li key={index}><b>{displayName}: </b>{text}</li>
     })
-
     return (
-      <div>
-        <input
-          type="text"
-          placeholder="Display name"
-          onKeyUp={this.handleDisplayName}
-        />
-        <input
-          type="text"
-          placeholder="Enter a message..."
-          onKeyUp={this.handleMessage}
-        />
+      <div className="container">
+        <h4>Socket.io Playground 🤸‍♀️</h4>
+        <div style={{ width: '30%' }}>
+          <input
+            type="text"
+            placeholder="Display name"
+            onKeyUp={this.handleDisplayName}
+          />
+        </div>
+        <div style={{ width: '50%' }}>
+          <input
+            type="text"
+            placeholder="Enter a message..."
+            onKeyUp={this.handleMessage}
+          />
+        </div>
         <ul>{messages}</ul>
       </div>
     )
